@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Success</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="container">
+        <a href="/" class="brand">🔐 SecureShare</a>
+        <ul class="nav-links">
+          <li><a href="/">Upload</a></li>
+          <li><a href="/dashboard.html">Dashboard</a></li>
+          <li><a href="/history.html">History</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h2 class="text-success">✅ File Uploaded Successfully!</h2>
+      <p>Your file was uploaded securely. Use the link below to download it:</p>
+      <br>
+      <div class="input-group">
+        <input type="text" id="downloadLink" value="http://localhost:8080/download/abcd1234" readonly>
+        <button onclick="copyLink()" class="btn-primary">Copy Link</button>
+      </div>
+      <br>
+      <p>Share this link with the intended recipient.</p>
+      <br>
+      <a href="/" class="btn-secondary">Upload Another File</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SecureShare. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function copyLink() {
+      const link = document.getElementById('downloadLink');
+      navigator.clipboard.writeText(link.value).then(() => {
+        alert('Link copied to clipboard!');
+      }).catch(err => {
+        alert('Failed to copy the link. Please copy it manually.');
+      });
+    }
+  </script>
+</body>
+</html>

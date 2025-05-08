@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="container">
+        <a href="/" class="brand">🔐SecureShare</a>
+        <ul class="nav-links">
+          <li><a href="/">Upload</a></li>
+          <li><a href="/dashboard.html">Dashboard</a></li>
+          <li><a href="/history.html">History</a></li>
+          <li><a href="/Trash.html">Trash</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title centered-title">📂 All Shared Files</h2>
+
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>File Name</th>
+            <th>Uploader</th>
+            <th>Upload Time</th>
+            <th>Expires At</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="filesList">
+          <!-- Rows added dynamically via script.js -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SecureShare. All rights reserved.</p>
+  </footer>
+
+  <script src="/javascript/script.js"></script>
+</body>
+</html>

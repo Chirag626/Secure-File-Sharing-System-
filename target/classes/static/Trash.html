@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cleaned Files - Secure File Sharing System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-purple-200 font-sans">
+  <header>
+    <nav>
+      <div class="container">
+        <ul class="nav-links">
+          <li><a href="/index.html" class="font-semibold text-black-600 hover:text-blue-600 active">🏚 Back To Home</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="max-w-4xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-lg">
+    <h1 class="text-2xl font-bold text-center text-red-600 mb-6">🗑 Cleaned / Trashed Files</h1>
+
+    <!-- Filter Buttons with Counts -->
+    <div class="flex justify-center space-x-4 mb-6">
+      <button id="allBtn" onclick="filterFiles('all')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded">
+        All Files (<span id="allFilesCount">0</span>)
+      </button>
+      <button id="manualBtn" onclick="filterFiles('manual')" class="bg-yellow-200 hover:bg-yellow-300 text-yellow-800 px-4 py-2 rounded">
+        Manually Deleted Files (<span id="manualFilesCount">0</span>)
+      </button>
+      <button id="autoBtn" onclick="filterFiles('auto')" class="bg-blue-200 hover:bg-blue-300 text-blue-800 px-4 py-2 rounded">
+        Auto Deleted Files (<span id="autoFilesCount">0</span>)
+      </button>
+    </div>
+
+    <!-- Files Container -->
+    <div id="cleanedContainer">
+      <div id="cleanedFiles" class="space-y-4">
+        <!-- Grouped cleaned files will appear here -->
+      </div>
+    </div>
+
+    <!-- No Files Message -->
+    <div id="noFilesMessage" class="text-center text-gray-500 mt-4 hidden">
+      No cleaned files found.
+    </div>
+  </div>
+
+  <script>
+    let allFiles = [];
+
+    // Fetch cleaned files from the server
+    function loadCleanedFiles() {
+      fetch("/api/cleaned")
+        .then(res => res.json())
+        .then(data => {
+          allFiles = data;
+          updateFileCounts(); // Update counts after loading files
+          renderFiles('all'); // Default to show all files
+        })
+        .catch(err => {
+          console.error("Failed to load cleaned files:", err);
+          document.getElementById("noFilesMessage").textContent = "Error loading files.";
+          document.getElementById("noFilesMessage").classList.remove("hidden");
+        });
+    }
+
+    // Render files based on the selected filter
+    function renderFiles(filter) {
+      const list = document.getElementById("cleanedFiles");
+      const message = document.getElementById("noFilesMessage");
+      list.innerHTML = "";
+      message.classList.add("hidden");
+
+      const filteredFiles = allFiles
+      .filter(file => {
+        if (filter === 'manual') return file.manuallyDeleted;
+        if (filter === 'auto') return !file.manuallyDeleted;
+        return true; // For 'all'
+      })
+      .sort((a, b) => new Date(b.trashedAt) - new Date(a.trashedAt)); // Sort newest first
+
+
+      if (filteredFiles.length === 0) {
+        message.classList.remove("hidden");
+        return;
+      }
+
+      filteredFiles.forEach(file => {
+        const isManual = file.manuallyDeleted;
+
+        const fileHTML = `
+          <li class="p-4 bg-gray-50 rounded-lg border border-gray-200 shadow-sm flex justify-between items-center mb-2">
+            <div>
+              <p class="text-lg font-semibold text-gray-800">📄 ${file.originalFilename}</p>
+              <p class="text-sm text-gray-600">Receiver: ${file.receiverEmail}</p>
+              <p class="text-sm text-gray-600">Trashed At: ${new Date(file.trashedAt).toLocaleString()}</p>
+
+              <span class="inline-block mt-1 px-3 py-1 text-sm ${
+                isManual ? 'bg-yellow-100 text-yellow-600' : 'bg-blue-100 text-blue-600'
+              } rounded-full">
+                ${isManual ? '🧹 Manually Deleted' : '⚙️ Auto Deleted'}
+              </span>
+
+              <span 
+                class="inline-block mt-1 ml-2 px-3 py-1 text-sm bg-red-100 text-red-600 rounded-full countdown-timer" 
+                data-trashed-at="${file.trashedAt}">
+                ⏳ Calculating...
+              </span>
+            </div>
+
+            ${
+              isManual
+                ? `<button onclick="restoreFile('${file.code}')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+                    ♻️ Restore
+                  </button>`
+                : `<button onclick='prepareReupload(${JSON.stringify(file)})' class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                    🔄 Re-upload
+                  </button>`
+            }
+          </li>
+        `;
+
+        list.insertAdjacentHTML('beforeend', fileHTML);
+      });
+
+      updateCountdowns();
+    }
+
+    // Update file counts next to each filter button
+    function updateFileCounts() {
+      const allCount = allFiles.length;
+      const manualCount = allFiles.filter(file => file.manuallyDeleted).length;
+      const autoCount = allFiles.filter(file => !file.manuallyDeleted).length;
+
+      document.getElementById("allFilesCount").textContent = allCount;
+      document.getElementById("manualFilesCount").textContent = manualCount;
+      document.getElementById("autoFilesCount").textContent = autoCount;
+    }
+
+    // Handle filter button clicks
+    function filterFiles(filter) {
+      renderFiles(filter); // Render files based on the selected filter
+    }
+
+    // Update countdown timers dynamically
+    function updateCountdowns() {
+      const countdowns = document.querySelectorAll(".countdown-timer");
+
+      countdowns.forEach(span => {
+        const trashedAt = new Date(span.getAttribute("data-trashed-at"));
+        const deleteAt = new Date(trashedAt.getTime() + 3 * 24 * 60 * 60 * 1000);
+        const now = new Date();
+        const diff = deleteAt - now;
+
+        if (diff <= 0) {
+          span.textContent = "⏳ Deleting soon...";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        span.textContent = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left`;
+      });
+    }
+
+    // Restore a manually deleted file
+    function restoreFile(code) {
+      fetch(`/api/cleaned/restore/${code}`, { method: "PUT" })
+        .then(response => {
+          if (response.ok) {
+            alert("✅ File restored successfully.");
+            loadCleanedFiles();
+          } else {
+            alert("❌ Failed to restore file.");
+          }
+        })
+        .catch(error => {
+          console.error("Error restoring file:", error);
+          alert("⚠️ Error occurred while restoring.");
+        });
+    }
+
+    // Prepare file for re-upload
+    function prepareReupload(file) {
+      localStorage.setItem("reuploadData", JSON.stringify({
+        receiverEmail: file.receiverEmail,
+        originalFilename: file.originalFilename,
+        fileCode: file.code
+      }));
+
+      window.location.href = "/index.html";
+    }
+
+    // Initial load
+    loadCleanedFiles();
+    setInterval(updateCountdowns, 1000); // Update countdowns every second
+  </script>
+</body>
+</html>

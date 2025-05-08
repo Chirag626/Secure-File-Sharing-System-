@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload History</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-purple-200">
+  <header>
+    <nav class="bg-black shadow">
+      <div class="container mx-auto p-4 flex justify-between items-center">
+        <a href="/" class="brand">🔐 SecureShare</a>
+        <ul class="flex space-x-6">
+          <li><a href="/" class="text-yellow-600 hover:text-blue-600">Upload</a></li>
+          <li><a href="/dashboard.html" class="text-yellow-600 hover:text-blue-600">Dashboard</a></li>
+          <li><a href="/history.html" class="text-yellow-600 hover:text-blue-600 font-semibold border-b-2 border-blue-600">History</a></li>
+          <li><a href="/Trash.html" class="text-yellow-600 hover:text-blue-600">Trash</a></li>
+        </ul>
+      </div>    
+    </nav>
+  </header>
+
+  <main class="container mx-auto p-6 mt-8">
+    <h2 class="text-2xl font-bold mb-6 text-center">📜 Upload History</h2>
+    
+    <!-- Filter Buttons Positioned Above History Section -->
+  <div class="flex justify-center gap-4 mb-6">
+    <button id="filter-all" onclick="loadHistory('all')" class="filter-btn bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">All</button>
+    <button id="filter-active" onclick="loadHistory('active')" class="filter-btn bg-green-200 hover:bg-green-300 text-green-800 px-4 py-2 rounded">Active</button>
+    <button id="filter-downloaded" onclick="loadHistory('downloaded')" class="filter-btn bg-blue-200 hover:bg-blue-300 text-blue-800 px-4 py-2 rounded">Downloaded</button>
+    <button id="filter-expired" onclick="loadHistory('expired')" class="filter-btn bg-red-200 hover:bg-red-300 text-red-800 px-4 py-2 rounded">Expired</button>
+  </div>
+    
+    <!-- History Cards Injected Here -->
+    <div id="history-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+      <!-- Cards will be injected here by JS -->
+    </div>
+  </main>
+
+
+
+
+  <footer class="text-center mt-8 bg-gray-800 text-white py-4">
+    <p>&copy; 2025 SecureShare. All rights reserved.</p>
+  </footer>
+
+  <!-- External JavaScript file -->
+  <script src="/javascript/history.js"></script>
+  <script src="/javascript/shared-util.js"></script>
+</body>
+
+</html>
