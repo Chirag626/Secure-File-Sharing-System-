@@ -1,5 +1,5 @@
 # Frontend files
-*.html linguist-language=HTML linguist-weight=1
+*.html linguist-detectable=false
 *.css linguist-detectable=false
 *.js linguist-language=JavaScript linguist-weight=1
 *.jsp linguist-detectable=false
