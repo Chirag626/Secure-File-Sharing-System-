@@ -1,8 +1,8 @@
 # Frontend files
-*.html linguist-detectable=false
+*.html linguist-language=HTML linguist-weight=1
 *.css linguist-detectable=false
 *.js linguist-language=JavaScript linguist-weight=1
 *.jsp linguist-detectable=false
 
 # Backend files
-*.java linguist-language=Java linguist-weight=3
+*.java linguist-language=Java linguist-weight=10
