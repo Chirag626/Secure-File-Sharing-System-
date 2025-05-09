@@ -5,4 +5,4 @@
 *.jsp linguist-detectable=false
 
 # Backend files
-*.java linguist-language=Java
+*.java linguist-language=Java linguist-weight=3
