@@ -56,7 +56,7 @@ This project is designed to mimic the behavior of file-sharing tools like Google
 
 🗃️ Database :
 -------------
-= 💾 H2 In-Memory Database (can be replaced with MySQL or PostgreSQL)
+- 💾 H2 In-Memory Database (can be replaced with MySQL or PostgreSQL)
 
 🎨 Frontend :
 --------------
@@ -104,6 +104,6 @@ This project is designed to mimic the behavior of file-sharing tools like Google
 - 🛠️ Admin panel to monitor uploads and deletions
 
 ------------------------------------------
-   Author: Chirag Chaturvedi
+   Author: Chirag Chaturvedi 
    Email: chiragchaturvedi197@gmail.com
 ------------------------------------------
