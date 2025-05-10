@@ -92,6 +92,7 @@ This project is designed to mimic the behavior of file-sharing tools like Google
    src/main/resources/application.properties
 
    spring.mail.username = your_email@gmail.com
+   
    spring.mail.password = your_app_password
 
 
@@ -105,5 +106,6 @@ This project is designed to mimic the behavior of file-sharing tools like Google
 
 ------------------------------------------
    Author: Chirag Chaturvedi 
+   
    Email: chiragchaturvedi197@gmail.com
 ------------------------------------------
