@@ -9,16 +9,18 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-purple-200">
+<!-- <body class="bg-purple-200"> -->
+<body class="bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-300 font-sans text-gray-800 min-h-screen flex flex-col">
   <header>
-    <nav class="bg-black shadow">
-      <div class="container mx-auto p-4 flex justify-between items-center">
-        <a href="/" class="brand">🔐 SecureShare</a>
-        <ul class="flex space-x-6">
-          <li><a href="/" class="text-yellow-600 hover:text-blue-600">Upload</a></li>
-          <li><a href="/dashboard.html" class="text-yellow-600 hover:text-blue-600">Dashboard</a></li>
-          <li><a href="/history.html" class="text-yellow-600 hover:text-blue-600 font-semibold border-b-2 border-blue-600">History</a></li>
-          <li><a href="/Trash.html" class="text-yellow-600 hover:text-blue-600">Trash</a></li>
+    <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-white text-2xl font-bold flex items-center gap-2">
+        🔐 <span>SecureShare</span>
+      </a>
+         <ul class="flex space-x-6">
+          <li><a href="/" class="text-yellow-200 hover:underline  hover:text-blue-600">Upload</a></li>
+          <li><a href="/dashboard.html" class="text-yellow-200 hover:underline  hover:text-blue-600">Dashboard</a></li>
+          <li><a href="/history.html" class="text-yellow-200 hover:underline  hover:text-blue-600">History</a></li>
+          <li><a href="/Trash.html" class="text-yellow-200 hover:underline  hover:text-blue-600">Trash</a></li>
         </ul>
       </div>    
     </nav>

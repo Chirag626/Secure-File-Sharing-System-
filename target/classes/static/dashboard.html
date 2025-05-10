@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload History</title>
   <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+
+<body class="bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-300 font-sans text-gray-800 min-h-screen flex flex-col">
+  
   <header>
-    <nav>
-      <div class="container">
-        <a href="/" class="brand">🔐SecureShare</a>
-        <ul class="nav-links">
-          <li><a href="/">Upload</a></li>
-          <li><a href="/dashboard.html">Dashboard</a></li>
-          <li><a href="/history.html">History</a></li>
-          <li><a href="/Trash.html">Trash</a></li>
+   <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-white text-2xl font-bold flex items-center gap-2">
+        🔐 <span>SecureShare</span>
+      </a>
+         <ul class="flex space-x-6">
+          <li><a href="/" class="text-yellow-200 hover:underline  hover:text-blue-600">Upload</a></li>
+          <li><a href="/dashboard.html" class="text-yellow-200 hover:underline  hover:text-blue-600">Dashboard</a></li>
+          <li><a href="/history.html" class="text-yellow-200 hover:underline  hover:text-blue-600">History</a></li>
+          <li><a href="/Trash.html" class="text-yellow-200 hover:underline  hover:text-blue-600">Trash</a></li>
         </ul>
-      </div>
+      </div>    
     </nav>
   </header>
 
-  <main class="container">
-    <h2 class="section-title centered-title">📂 All Shared Files</h2>
 
+  <!-- <main class="container px-4 py-8"> -->
+    <main class="container mx-auto p-6 mt-8"></main>
+    <h2 class="section-title centered-title text-2xl font-semibold">📂 All Shared Files</h2>
 
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
+    <!-- Table Section -->
+    <div class="table-responsive mt-6">
+      <table class="table min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-gray-800 text-white">
           <tr>
-            <th>File Name</th>
-            <th>Uploader</th>
-            <th>Upload Time</th>
-            <th>Expires At</th>
-            <th>Status</th>
-            <th>Download</th> <!-- added -->
-            <th>Action</th>
+            <th class="py-3 px-6 text-left">File Name</th>
+            <th class="py-3 px-6 text-left">Uploader</th>
+            <th class="py-3 px-6 text-left">Upload Time</th>
+            <th class="py-3 px-6 text-left">Expires At</th>
+            <th class="py-3 px-6 text-left">Status</th>
+            <th class="py-3 px-6 text-left">Download</th>
+            <th class="py-3 px-6 text-left">Action</th>
           </tr>
         </thead>
         <tbody id="filesList">
@@ -45,11 +52,13 @@
     </div>
   </main>
 
-  <footer>
+  <footer class="bg-gray-900 text-white text-center py-4 mt-8">
     <p>&copy; 2025 SecureShare. All rights reserved.</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="/javascript/dashboard.js"></script>
   <script src="/javascript/shared-util.js"></script>
 </body>
+
 </html>
