@@ -1,12 +1,14 @@
 🔐 SecureShare - A Secure File Sharing System
 ----------------------------------------------
 
-This is a web-based project built using Spring Boot that allows users to upload, share, and manage files securely. The system includes features like encryption, auto-deletion, trash management, email alerts, and history tracking.
+SecureShare - A Secure File Sharing System  is a Spring Boot–based web app that allows users to securely upload and share encrypted files with one-time access links and email notifications. Features include AES encryption, expiry control, trash & restore, auto-cleanup scheduler, file statistics dashboard, and responsive frontend built with HTML/CSS/JavaScript.
+
 
 📄 About the Project:
 -----------------------
 
-This project is designed to mimic the behavior of file-sharing tools like Google Drive, but with automatic clean-up and added security. It is a single-user prototype for secure document sharing.
+This project is a simple and secure file sharing system where users can upload and share files with others using a unique download link. The system uses AES encryption to protect files so that only authorized people can access them. It also has an auto-trash feature that moves old files to trash automatically and lets users restore them if needed. Email notifications are sent when files are uploaded or deleted, helping users stay updated. The whole system is built using Java Spring Boot for the backend and HTML, CSS, and JavaScript for the frontend.
+
 
 🚀 Features :
 --------------
