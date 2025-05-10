@@ -47,12 +47,12 @@ This project is designed to mimic the behavior of file-sharing tools like Google
 
 🔙 Backend :
 -------------
-☕ Java 17
-🌱 Spring Boot (used for APIs and backend logic)
-🧩 Spring Data JPA (for database operations)
-⏱️ Spring Scheduler (for background auto-delete task)
-📩 Spring Mail (for sending emails)
-🛡️ AES Encryption (custom utility class for file security)
+- ☕ Java 17
+- 🌱 Spring Boot (used for APIs and backend logic)
+- 🧩 Spring Data JPA (for database operations)
+- ⏱️ Spring Scheduler (for background auto-delete task)
+- 📩 Spring Mail (for sending emails)
+- 🛡️ AES Encryption (custom utility class for file security)
 
 🗃️ Database :
 -------------
@@ -82,8 +82,8 @@ This project is designed to mimic the behavior of file-sharing tools like Google
 2. Clone the project.
 3. Open terminal and run:
 
-   mvn clean install
-   mvn spring-boot:run
+ -  mvn clean install
+ -  mvn spring-boot:run
 
 4. Open browser and go to:
    http://localhost:8080/index.html
@@ -91,9 +91,8 @@ This project is designed to mimic the behavior of file-sharing tools like Google
 5. Make sure to configure email in:
    src/main/resources/application.properties
 
-   spring.mail.username = your_email@gmail.com
-   
-   spring.mail.password = your_app_password
+   - spring.mail.username = your_email@gmail.com
+   - spring.mail.password = your_app_password
 
 
 💡 Future Improvements :
@@ -105,7 +104,6 @@ This project is designed to mimic the behavior of file-sharing tools like Google
 - 🛠️ Admin panel to monitor uploads and deletions
 
 ------------------------------------------
-   Author: Chirag Chaturvedi 
-   
-   Email: chiragchaturvedi197@gmail.com
+   - Author: Chirag Chaturvedi 
+   - Email: chiragchaturvedi197@gmail.com
 ------------------------------------------
