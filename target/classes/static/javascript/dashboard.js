@@ -23,10 +23,14 @@ function loadDashboard(sortBy) {
           ? `<span class="status expired">Expired</span>`
           : `<span class="status active">Expires in ${timeLeftInMinutes} minute(s)</span>`;
 
-        const actionButton = getActionButton(file);
-
         const row = document.createElement('tr');
         if (expired) row.classList.add('expired-row');
+
+        const downloadButton = expired
+          ? `<span class="text-gray-400">Unavailable</span>`
+          : `<a href="/download/${file.code}" class="btn-primary btn-sm">Download</a>`;
+
+        const actionButton = getActionButton(file);
 
         row.innerHTML = `
           <td>${file.originalFilename}</td>
@@ -34,11 +38,7 @@ function loadDashboard(sortBy) {
           <td>${formatDate(file.uploadTime)} <span class="time-ago">(${timeAgo(file.uploadTime)})</span></td>
           <td>${formatDate(file.expiryTime)}</td>
           <td>${statusHTML}</td>
-          <td>
-            <a href="/download/${file.code}" class="btn-primary btn-sm ${expired ? 'disabled' : ''}">
-              Download
-            </a>
-          </td>
+          <td>${downloadButton}</td>
           <td>${actionButton}</td>
         `;
 
@@ -58,7 +58,7 @@ function displayExpiredFileAlert(expiredFiles) {
   if (existingAlert) existingAlert.remove();
 
   if (expiredFiles.length > 0) {
-    let alertBox = document.createElement('div');
+    const alertBox = document.createElement('div');
     alertBox.classList.add('expired-warning');
     alertBox.innerHTML = `
       ⚠️ Some of your files have expired. You can no longer access them.
