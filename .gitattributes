@@ -1,5 +1,5 @@
-*.html linguist-language=HTML linguist-weight=1
+*.html linguist-detectable=false
 *.java linguist-language=Java linguist-weight=3
 *.css linguist-detectable=true
-*.js linguist-detectable=false
-*.jsp linguist-detectable=false
+*.js linguist-detectable=true
+*.jsp linguist-detectable=true
